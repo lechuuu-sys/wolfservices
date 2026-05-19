@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wolf Services and Repair — Columbus, OH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #111111;
+      --dark:    #1a1a1a;
+      --card:    #222222;
+      --orange:  #E87B1E;
+      --gold:    #C8800A;
+      --red:     #C0272D;
+      --white:   #F4F4F4;
+      --gray:    #999999;
+      --border:  #333333;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ─────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(17,17,17,0.95);
+      border-bottom: 2px solid var(--orange);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 38px; height: 38px;
+    }
+    .nav-brand {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .nav-brand span { color: var(--red); }
+    .nav-cta {
+      display: flex; gap: 10px; align-items: center;
+    }
+    .btn-call-nav {
+      background: var(--orange);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      padding: 8px 18px;
+      border: none; border-radius: 2px;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-call-nav:hover { background: var(--gold); }
+
+    /* ── HERO ────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 100px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(135deg, rgba(232,123,30,0.08) 0%, transparent 50%),
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 40px,
+          rgba(255,255,255,0.012) 40px,
+          rgba(255,255,255,0.012) 41px
+        );
+    }
+    .hero-accent {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--orange), var(--red), var(--orange));
+    }
+    .hero-content { position: relative; max-width: 800px; }
+    .hero-eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 40px; height: 2px;
+      background: var(--orange);
+    }
+    .hero-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.0;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .hero-title .highlight { color: var(--orange); }
+    .hero-title .red { color: var(--red); }
+    .hero-sub {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+      font-weight: 400;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 28px;
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: #bbb;
+      max-width: 560px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+    .hero-badges {
+      display: flex; gap: 20px; flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .badge {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      color: var(--orange);
+      text-transform: uppercase;
+    }
+    .badge-dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; }
+    .hero-ctas {
+      display: flex; gap: 14px; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--orange);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border: none; border-radius: 2px;
+      cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 15px 36px;
+      border: 2px solid var(--border);
+      border-radius: 2px;
+      cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+
+    /* ── BAND ─────────────────────────────────────── */
+    .band {
+      background: var(--orange);
+      padding: 18px 5%;
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; flex-wrap: wrap;
+    }
+    .band-item {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .band-sep { width: 6px; height: 6px; background: var(--black); transform: rotate(45deg); }
+
+    /* ── SECTIONS SHARED ──────────────────────────── */
+    section { padding: 90px 5%; }
+    .section-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .section-title span { color: var(--orange); }
+    .section-desc {
+      font-size: 1rem;
+      color: #999;
+      max-width: 600px;
+      margin-bottom: 56px;
+    }
+    .divider {
+      width: 50px; height: 3px;
+      background: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    /* ── SERVICES ─────────────────────────────────── */
+    #services { background: var(--dark); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+    }
+    .service-card {
+      background: var(--card);
+      padding: 36px 32px;
+      border-top: 3px solid transparent;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+      cursor: default;
+    }
+    .service-card:hover {
+      border-color: var(--orange);
+      background: #2a2a2a;
+      transform: translateY(-4px);
+    }
+    .service-icon {
+      width: 52px; height: 52px;
+      margin-bottom: 20px;
+    }
+    .service-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+    .service-desc {
+      font-size: 0.9rem;
+      color: #888;
+      line-height: 1.65;
+    }
+    .service-cta {
+      display: inline-block;
+      margin-top: 16px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      color: var(--orange);
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .service-cta:hover { border-color: var(--orange); }
+
+    /* ── WHY US ───────────────────────────────────── */
+    #why { background: var(--black); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 40px;
+    }
+    .why-item { }
+    .why-number {
+      font-family: 'Oswald', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .why-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .why-desc { font-size: 0.9rem; color: #888; }
+
+    /* ── CONTACT ──────────────────────────────────── */
+    #contact { background: var(--dark); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    .contact-info { }
+    .contact-phone {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--orange);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+    .contact-phone:hover { color: var(--gold); }
+    .contact-phone-label {
+      font-size: 0.8rem;
+      color: var(--gray);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .contact-detail {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.95rem;
+      color: #bbb;
+      margin-bottom: 14px;
+    }
+    .contact-detail svg { flex-shrink: 0; }
+    .contact-wa {
+      margin-top: 32px;
+      display: inline-flex; align-items: center; gap: 12px;
+      background: #25D366;
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .contact-wa:hover { background: #1ebe5d; transform: translateY(-2px); }
+
+    /* FORM */
+    .contact-form { }
+    .form-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: #111;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.95rem;
+      padding: 12px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--orange); }
+    .form-group select option { background: #1a1a1a; }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .btn-submit {
+      width: 100%;
+      background: var(--orange);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 16px;
+      border: none; border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 4px;
+    }
+    .btn-submit:hover { background: var(--gold); transform: translateY(-2px); }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      background: #111;
+      border: 1px solid var(--orange);
+      border-radius: 2px;
+    }
+    .form-success h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .form-success p { color: #888; }
+
+    /* ── COVERAGE ─────────────────────────────────── */
+    #coverage { background: var(--black); }
+    .coverage-content {
+      display: flex; gap: 60px; flex-wrap: wrap; align-items: center;
+    }
+    .coverage-text { flex: 1; min-width: 280px; }
+    .areas-list {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 24px;
+    }
+    .area-tag {
+      background: var(--card);
+      border: 1px solid var(--border);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      color: #bbb;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .area-tag:hover { border-color: var(--orange); color: var(--orange); }
+    .coverage-map {
+      flex: 1; min-width: 280px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      height: 260px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .coverage-map-inner {
+      text-align: center; padding: 20px;
+    }
+    .coverage-map-icon { font-size: 3rem; margin-bottom: 12px; }
+    .coverage-map-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .coverage-map-sub { font-size: 0.85rem; color: var(--gray); margin-top: 4px; }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    footer {
+      background: #0d0d0d;
+      border-top: 2px solid var(--orange);
+      padding: 40px 5% 24px;
+    }
+    .footer-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      flex-wrap: wrap; gap: 32px;
+      margin-bottom: 32px;
+    }
+    .footer-brand {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .footer-brand span { color: var(--red); }
+    .footer-tagline { font-size: 0.85rem; color: var(--gray); margin-top: 6px; }
+    .footer-links {
+      display: flex; gap: 32px; flex-wrap: wrap;
+    }
+    .footer-col h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+    .footer-col a {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--gray);
+      text-decoration: none;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 0.8rem; color: var(--gray); }
+    .footer-lang {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--orange);
+      text-transform: uppercase;
+    }
+
+    /* ── FLOATING WHATSAPP ────────────────────────── */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 24px; z-index: 200;
+      width: 58px; height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: pulse-wa 3s infinite;
+    }
+    .wa-float:hover { transform: scale(1.12); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
+    @keyframes pulse-wa {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+      50%       { box-shadow: 0 4px 32px rgba(37,211,102,0.65); }
+    }
+
+    /* ── SCROLL ANIMATIONS ────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 600px) {
+      .band { gap: 20px; }
+      .band-sep { display: none; }
+      section { padding: 60px 5%; }
+      .hero-ctas { flex-direction: column; }
+      .btn-primary, .btn-secondary { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <!-- Wolf icon SVG inline -->
+    <svg class="nav-logo-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="40,8 72,28 72,60 40,76 8,60 8,28" fill="#1a1a1a" stroke="#E87B1E" stroke-width="2"/>
+      <!-- Roof shape -->
+      <polygon points="40,18 62,36 18,36" fill="#C0272D"/>
+      <!-- House body -->
+      <rect x="22" y="36" width="36" height="22" fill="#E87B1E" opacity="0.2"/>
+      <rect x="22" y="36" width="36" height="22" fill="none" stroke="#E87B1E" stroke-width="1.5"/>
+      <!-- Door -->
+      <rect x="34" y="47" width="12" height="11" rx="1" fill="#E87B1E" opacity="0.8"/>
+      <!-- Wolf ears suggestion -->
+      <polygon points="26,20 32,30 20,30" fill="#C0272D" opacity="0.7"/>
+      <polygon points="54,20 60,30 48,30" fill="#C0272D" opacity="0.7"/>
+    </svg>
+    <div class="nav-brand">WOLF SERVICES<br><span>AND REPAIR</span></div>
+  </a>
+  <div class="nav-cta">
+    <a href="tel:6149155571" class="btn-call-nav">📞 614-915-5571</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Columbus, Ohio — Licensed &amp; Insured</div>
+    <h1 class="hero-title">
+      WE FIX<br>
+      <span class="highlight">IT</span> <span class="red">ALL</span>
+    </h1>
+    <p class="hero-sub">Wolf Services &amp; Repair</p>
+    <p class="hero-desc">
+      Roofing, remodeling, drywall, fences, driveways and more.
+      One call — every job done right, on time, and built to last.
+    </p>
+    <div class="hero-badges">
+      <div class="badge"><div class="badge-dot"></div> Free Estimates</div>
+      <div class="badge"><div class="badge-dot"></div> Same-Day Response</div>
+      <div class="badge"><div class="badge-dot"></div> Work Guaranteed</div>
+      <div class="badge"><div class="badge-dot"></div> Se Habla Español</div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.06 1.23 2 2 0 012.03 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+        Get Free Quote
+      </a>
+      <a href="#services" class="btn-secondary">
+        View Services
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BAND -->
+<div class="band">
+  <div class="band-item">✓ Roofing</div>
+  <div class="band-sep"></div>
+  <div class="band-item">✓ Remodeling</div>
+  <div class="band-sep"></div>
+  <div class="band-item">✓ Siding &amp; Gutters</div>
+  <div class="band-sep"></div>
+  <div class="band-item">✓ Drywall &amp; Painting</div>
+  <div class="band-sep"></div>
+  <div class="band-item">✓ Fencing</div>
+  <div class="band-sep"></div>
+  <div class="band-item">✓ Concrete Work</div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="reveal">
+    <div class="section-label">What We Do</div>
+    <div class="divider"></div>
+    <h2 class="section-title">OUR <span>SERVICES</span></h2>
+    <p class="section-desc">Every job completed with quality materials, skilled hands, and a satisfaction guarantee. No job too big or too small.</p>
+  </div>
+  <div class="services-grid">
+    <!-- Roofing -->
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="26,6 48,22 4,22" fill="#C0272D" opacity="0.9"/>
+        <rect x="10" y="22" width="32" height="22" rx="1" fill="#E87B1E" opacity="0.15" stroke="#E87B1E" stroke-width="1.5"/>
+        <rect x="20" y="32" width="12" height="12" rx="1" fill="#E87B1E" opacity="0.6"/>
+      </svg>
+      <div class="service-name">Roofing</div>
+      <p class="service-desc">Full roof replacement, repair, and inspection. Shingles, flashing, and gutters — we handle it all to keep your home watertight.</p>
+      <a href="#contact" class="service-cta">Get a Quote →</a>
+    </div>
+    <!-- Remodeling -->
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="10" width="28" height="32" rx="1" stroke="#E87B1E" stroke-width="1.5" fill="none"/>
+        <rect x="12" y="16" width="10" height="10" rx="1" fill="#E87B1E" opacity="0.4"/>
+        <rect x="12" y="30" width="10" height="8" rx="1" fill="#E87B1E" opacity="0.4"/>
+        <path d="M38 20 L46 12 M38 20 L32 26" stroke="#C0272D" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="42" cy="16" r="4" fill="#C0272D" opacity="0.7"/>
+      </svg>
+      <div class="service-name">Remodeling</div>
+      <p class="service-desc">Kitchen, bathroom, basement, or full home renovation. We transform your space with attention to detail and craftsmanship.</p>
+      <a href="#contact" class="service-cta">Get a Quote →</a>
+    </div>
+    <!-- Siding & Gutters -->
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="8" width="40" height="6" rx="1" fill="#E87B1E" opacity="0.8"/>
+        <rect x="6" y="18" width="40" height="6" rx="1" fill="#E87B1E" opacity="0.6"/>
+        <rect x="6" y="28" width="40" height="6" rx="1" fill="#E87B1E" opacity="0.4"/>
+        <rect x="6" y="38" width="40" height="6" rx="1" fill="#E87B1E" opacity="0.2"/>
+        <path d="M42 14 L46 40" stroke="#C0272D" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div class="service-name">Siding &amp; Gutters</div>
+      <p class="service-desc">Installation, repair, and cleaning. Protect your home's exterior with durable siding and properly functioning gutter systems.</p>
+      <a href="#contact" class="service-cta">Get a Quote →</a>
+    </div>
+    <!-- Drywall & Painting -->
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="10" width="30" height="32" rx="1" stroke="#E87B1E" stroke-width="1.5" fill="#E87B1E" fill-opacity="0.07"/>
+        <path d="M36 10 L46 20" stroke="#C0272D" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="34" y="18" width="8" height="24" rx="2" fill="#C0272D" opacity="0.6"/>
+        <path d="M10 20 L30 20 M10 28 L30 28 M10 36 L22 36" stroke="#E87B1E" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="service-name">Drywall &amp; Painting</div>
+      <p class="service-desc">Patch, replace, and finish drywall to a flawless surface. Interior and exterior painting with premium paints and clean edges.</p>
+      <a href="#contact" class="service-cta">Get a Quote →</a>
+    </div>
+    <!-- Fence -->
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="20" width="44" height="4" rx="1" fill="#E87B1E" opacity="0.7"/>
+        <rect x="4" y="32" width="44" height="4" rx="1" fill="#E87B1E" opacity="0.5"/>
+        <rect x="6" y="12" width="6" height="28" rx="1" fill="#C0272D" opacity="0.8"/>
+        <rect x="18" y="12" width="6" height="28" rx="1" fill="#C0272D" opacity="0.8"/>
+        <rect x="30" y="12" width="6" height="28" rx="1" fill="#C0272D" opacity="0.8"/>
+        <rect x="42" y="12" width="6" height="28" rx="1" fill="#C0272D" opacity="0.8"/>
+      </svg>
+      <div class="service-name">Fence Installation &amp; Repair</div>
+      <p class="service-desc">Wood, vinyl, chain-link, or privacy fencing. New installs, post replacement, and full repairs to restore security and curb appeal.</p>
+      <a href="#contact" class="service-cta">Get a Quote →</a>
+    </div>
+    <!-- Driveway -->
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 44 L36 44 L30 10 L22 10 Z" fill="#E87B1E" fill-opacity="0.15" stroke="#E87B1E" stroke-width="1.5"/>
+        <path d="M22 10 L30 10" stroke="#E87B1E" stroke-width="2" stroke-linecap="round"/>
+        <path d="M19 22 L33 22 M18 32 L34 32" stroke="#E87B1E" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 3"/>
+        <circle cx="10" cy="40" r="6" fill="#C0272D" opacity="0.6"/>
+        <circle cx="42" cy="40" r="6" fill="#C0272D" opacity="0.6"/>
+      </svg>
+      <div class="service-name">Driveway &amp; Concrete</div>
+      <p class="service-desc">New concrete driveways, patios, walkways, and repairs. We pour and finish concrete that looks great and lasts for decades.</p>
+      <a href="#contact" class="service-cta">Get a Quote →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="reveal">
+    <div class="section-label">Why Choose Wolf</div>
+    <div class="divider"></div>
+    <h2 class="section-title">BUILT ON <span>TRUST</span></h2>
+    <p class="section-desc">We're not a franchise or a call center. We're a local Columbus team you can count on.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-item reveal">
+      <div class="why-number">24h</div>
+      <div class="why-title">Fast Response</div>
+      <p class="why-desc">We respond to every estimate request within 24 hours. Most jobs start within the week.</p>
+    </div>
+    <div class="why-item reveal">
+      <div class="why-number">100%</div>
+      <div class="why-title">Work Guaranteed</div>
+      <p class="why-desc">If you're not satisfied, we come back and make it right. Simple as that.</p>
+    </div>
+    <div class="why-item reveal">
+      <div class="why-number">$0</div>
+      <div class="why-title">Free Estimates</div>
+      <p class="why-desc">No charge, no obligation. We come out, assess the job, and give you a transparent quote.</p>
+    </div>
+    <div class="why-item reveal">
+      <div class="why-number">2×</div>
+      <div class="why-title">Se Habla Español</div>
+      <p class="why-desc">Bilingual team — we serve Columbus's English and Spanish-speaking communities equally.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <div class="section-label">Get in Touch</div>
+      <div class="divider"></div>
+      <h2 class="section-title">READY TO <span>START?</span></h2>
+      <p style="color:#999; margin-bottom:32px;">Call us, send a WhatsApp, or fill out the form. We'll get back to you within 24 hours.</p>
+
+      <a href="tel:6149155571" class="contact-phone">614-915-5571</a>
+      <div class="contact-phone-label">Primary Line</div>
+      <a href="tel:6149409138" class="contact-phone" style="font-size:1.5rem;">614-940-9138</a>
+      <div class="contact-phone-label">Secondary Line</div>
+
+      <div class="contact-detail">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E87B1E" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        wolfservicesandrepairs@gmail.com
+      </div>
+      <div class="contact-detail">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E87B1E" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Columbus, OH &amp; surrounding areas
+      </div>
+
+      <a href="https://wa.me/16149155571?text=Hi%20Wolf%20Services!%20I%27d%20like%20a%20free%20estimate." target="_blank" class="contact-wa">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.855L.057 23.446a.5.5 0 00.614.635l5.913-1.548A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 01-5.071-1.384l-.361-.214-3.743.981.998-3.641-.235-.375A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Message on WhatsApp
+      </a>
+    </div>
+
+    <div class="contact-form reveal">
+      <form id="quoteForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" name="firstName" required placeholder="John" />
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" name="lastName" required placeholder="Smith" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" name="phone" required placeholder="(614) 000-0000" />
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="john@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Service Needed *</label>
+          <select name="service" required>
+            <option value="" disabled selected>Select a service...</option>
+            <option>Roofing</option>
+            <option>Remodeling</option>
+            <option>Siding &amp; Gutters</option>
+            <option>Drywall &amp; Painting</option>
+            <option>Fence Installation &amp; Repair</option>
+            <option>Driveway &amp; Concrete</option>
+            <option>Multiple Services</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell Us About Your Project</label>
+          <textarea name="message" placeholder="Brief description of the work needed, address, and any important details..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">
+          Request Free Estimate →
+        </button>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div style="font-size:2.5rem; margin-bottom:12px;">✅</div>
+        <h3>Request Received!</h3>
+        <p>We'll contact you within 24 hours to schedule your free estimate. Thank you for choosing Wolf Services!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COVERAGE -->
+<section id="coverage">
+  <div class="coverage-content">
+    <div class="coverage-text reveal">
+      <div class="section-label">Service Area</div>
+      <div class="divider"></div>
+      <h2 class="section-title">COLUMBUS &amp; <span>BEYOND</span></h2>
+      <p style="color:#999; margin-bottom:24px;">We serve Columbus, OH and surrounding communities. Not sure if we cover your area? Just call us.</p>
+      <div class="areas-list">
+        <div class="area-tag">Columbus</div>
+        <div class="area-tag">Dublin</div>
+        <div class="area-tag">Westerville</div>
+        <div class="area-tag">Gahanna</div>
+        <div class="area-tag">Reynoldsburg</div>
+        <div class="area-tag">Hilliard</div>
+        <div class="area-tag">Grove City</div>
+        <div class="area-tag">Pickerington</div>
+        <div class="area-tag">New Albany</div>
+        <div class="area-tag">Worthington</div>
+        <div class="area-tag">+ More</div>
+      </div>
+    </div>
+    <div class="coverage-map reveal">
+      <div class="coverage-map-inner">
+        <div class="coverage-map-icon">📍</div>
+        <div class="coverage-map-text">Central Ohio</div>
+        <div class="coverage-map-sub">Columbus, OH and surrounding areas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">WOLF SERVICES <span>AND REPAIR</span></div>
+      <div class="footer-tagline">We Fix It All — Columbus, OH</div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#services">Roofing</a>
+        <a href="#services">Remodeling</a>
+        <a href="#services">Siding &amp; Gutters</a>
+        <a href="#services">Drywall &amp; Painting</a>
+        <a href="#services">Fencing</a>
+        <a href="#services">Concrete Work</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:6149155571">614-915-5571</a>
+        <a href="tel:6149409138">614-940-9138</a>
+        <a href="mailto:wolfservicesandrepairs@gmail.com">Email Us</a>
+        <a href="https://wa.me/16149155571" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Wolf Services and Repair. Columbus, OH. All rights reserved.</div>
+    <div class="footer-lang">Se Habla Español</div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/16149155571?text=Hi%20Wolf%20Services!%20I%27d%20like%20a%20free%20estimate." target="_blank" class="wa-float" title="Chat on WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.855L.057 23.446a.5.5 0 00.614.635l5.913-1.548A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.95 9.95 0 01-5.071-1.384l-.361-.214-3.743.981.998-3.641-.235-.375A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit (demo — no backend)
+  document.getElementById('quoteForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    this.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    // En producción: conectar a Formspree, Netlify Forms, o EmailJS
+  });
+</script>
+</body>
+</html>
